@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import util.log.Log;
+import pers.mihao.common.util.log.Log;
 
 /**
  * 简单的future 的用法

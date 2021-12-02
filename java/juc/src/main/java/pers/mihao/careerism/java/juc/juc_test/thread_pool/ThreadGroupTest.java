@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
-import util.log.Log;
+import pers.mihao.common.util.log.Log;
 
 public class ThreadGroupTest {
 

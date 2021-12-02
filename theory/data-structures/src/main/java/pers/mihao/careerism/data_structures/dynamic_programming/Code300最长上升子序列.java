@@ -1,7 +1,6 @@
 package pers.mihao.careerism.data_structures.dynamic_programming;
 
 /**
- * $$
  * 300. 最长上升子序列
  * 给定一个无序的整数数组，找到其中最长上升子序列的长度。
  * 示例:
@@ -15,6 +14,10 @@ package pers.mihao.careerism.data_structures.dynamic_programming;
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ * @see Code516最长回文子序列
+ * @see Code5最长回文子串
+ * @see Code1143最长公共子序列
+ * @see Code873最长的斐波那契子序列的长度
  */
 public class Code300最长上升子序列 {
 
@@ -40,6 +43,27 @@ public class Code300最长上升子序列 {
             for (int j = 0; j < i; j++) {
                 // 如果这个数比当前数小 就计算最大长度+1
                 if (nums[j] < nums[i]) dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
+
+    /**
+     * dp的定义没有想好
+     * @param nums
+     * @return
+     */
+    public int lengthOfLIS320211130(int[] nums) {
+        int l = nums.length, max = -1;
+        /**
+         * dp[i] 表示 以 i为最大值最长上升子序列
+         */
+        int[] dp = new int[l];
+        for (int i = 0; i < l; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) dp[i] = Math.max(dp[i], dp[j] + 1);
             }
             max = Math.max(max, dp[i]);
         }

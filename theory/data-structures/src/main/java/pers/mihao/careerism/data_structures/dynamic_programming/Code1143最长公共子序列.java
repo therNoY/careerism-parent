@@ -1,7 +1,6 @@
 package pers.mihao.careerism.data_structures.dynamic_programming;
 
 /**
- * $$
  * 1143. 最长公共子序列
  * 给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
  * 一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
@@ -24,13 +23,18 @@ package pers.mihao.careerism.data_structures.dynamic_programming;
  * 1 <= text2.length <= 1000
  * 输入的字符串只含有小写英文字符。
  * 链接：https://leetcode-cn.com/problems/longest-common-subsequence
+ * @see Code516最长回文子序列
+ * @see Code5最长回文子串
+ * @see Code300最长上升子序列
+ * @see Code873最长的斐波那契子序列的长度
  */
 public class Code1143最长公共子序列 {
 
     public static void main(String[] args) {
-        String a = "jmjkbkjkv";
-        String b = "bsbininm";
+        String a = "abcde";
+        String b = "ace";
         System.out.println(new Code1143最长公共子序列().longestCommonSubsequence(a, b));
+        System.out.println(new Code1143最长公共子序列().longestCommonSubsequence20211201(a, b));
     }
 
     public int longestCommonSubsequence(String text1, String text2) {
@@ -79,6 +83,33 @@ public class Code1143最长公共子序列 {
             }
         }
         return dp[text1.length()][text2.length()];
+    }
+
+    /**
+     * 定义初始化条件的时候错误
+     * @param text1
+     * @param text2
+     * @return
+     */
+    public int longestCommonSubsequence20211201(String text1, String text2) {
+        int l1 = text1.length(), l2 = text2.length();
+        int[][] dp = new int[l1][l2];
+        for (int i = 0; i < l1; i++) {
+            for (int j = 0; j < l2; j++) {
+                if (i == 0 && j == 0) {
+                    dp[i][j] = text1.charAt(i) == text2.charAt(j) ? 1 : 0;
+                } else if (i == 0) {
+                    dp[i][j] = dp[i][j - 1] == 1 ? 1 : text1.charAt(i) == text2.charAt(j) ? 1 : 0;
+                } else if (j == 0) {
+                    dp[i][j] = dp[i - 1][j] == 1 ? 1 : text1.charAt(i) == text2.charAt(j) ? 1 : 0;
+                } else if (text1.charAt(i) == text2.charAt(j)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[l1 - 1][l2 - 1];
     }
 
 }

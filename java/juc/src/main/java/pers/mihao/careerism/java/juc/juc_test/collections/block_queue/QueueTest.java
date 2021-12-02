@@ -7,7 +7,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import util.log.Log;
+import pers.mihao.common.util.log.Log;
 import util.log.Logger;
 
 public class QueueTest {

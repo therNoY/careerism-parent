@@ -31,7 +31,7 @@ public class Code299猜数字游戏 {
             a.insert(0, "0");
         }
         ScanUtil.run(s -> {
-            String res = code299猜数字游戏.getHint2(a.toString(), s);
+            String res = code299猜数字游戏.getHint20211125(a.toString(), s);
             System.out.println("输入: " + s + " 结果: " + res);
             count.incrementAndGet();
             if (res.equals("4A0B")) {
@@ -86,7 +86,13 @@ public class Code299猜数字游戏 {
 
     }
 
-    public String getHint2(String secret, String guess) {
+    /**
+     * 20211125重新做
+     * @param secret
+     * @param guess
+     * @return
+     */
+    public String getHint20211125(String secret, String guess) {
         int aCount = 0, bCount = 0;
         if (secret == null || guess == null) return aCount + "A" + bCount + "B";
         char[] sArray = secret.toCharArray(), gArray = guess.toCharArray();

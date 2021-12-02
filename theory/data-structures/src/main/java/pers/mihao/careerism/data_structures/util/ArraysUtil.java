@@ -1,18 +1,53 @@
 package pers.mihao.careerism.data_structures.util;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * @Author mihao
  * @Date 2020/11/23 10:40
  */
 public class ArraysUtil {
 
-    /**
-     * 将字符串数组转成数组
-     * {{3,9},{7,12},{3,8},{6,8},{9,10},{2,9},{0,9},{3,9},{0,6},{2,8}}
-     * {13,4,5}
-     * {{9,12},{1,10},{4,11},{8,12},{3,9},{6,9},{6,7}}
-     * @param array
-     * @return
-     */
+    public static void main(String[] args) {
+        boolean[][] dp = new boolean[5][4];
+        printArray(dp);
+    }
+
+    public static void printArray(boolean[][] booleans) {
+        Arrays.stream(booleans).forEach(a->{
+            System.out.println(Arrays.toString(a)+"\n");
+        });
+    }
+
+    public static void printArray(int[][] booleans) {
+
+    }
+
+    public static void printArray(String[][] booleans) {
+
+    }
+
+    public static void printArray(Array array, int maxLength) {
+
+
+
+    }
+
+    static class Array {
+
+        Object object;
+
+        public Array(Object object) {
+            this.object = object;
+        }
+
+
+        // 维度
+        int getDimension() {
+            return 0;
+        }
+    }
+
 
 }

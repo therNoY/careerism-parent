@@ -1,7 +1,13 @@
 package pers.mihao.careerism.data_structures.dynamic_programming;
 
 /**
+ * 假定有一个容量固定背包 有若干个重量和价值不相等的物品
+ * 给出一个策略 使得装进背包的物品价值最大话
+ *
  * 0-1背包问题
+ * @see Code416分割等和子集
+ * @see Code322零钱兑换
+ * @author hspcadmin
  */
 public class 经典01背包 {
 
@@ -21,6 +27,7 @@ public class 经典01背包 {
         System.out.println(getMaxP2(w, p, c));
 //        System.out.println(new 经典01背包()._01Bages(w, p, c));
         System.out.println(new 经典01背包()._01Bages2(w, p, c));
+        System.out.println(new 经典01背包()._01Bages20211202(w, p, c));
     }
 
     /**
@@ -105,6 +112,44 @@ public class 经典01背包 {
                     dp[i][j] = p[i];
                 }
 
+            }
+        }
+        return dp[w.length - 1][c];
+    }
+
+
+    /**
+     *
+     * bingo dp 思路正确
+     * @param w 重量
+     * @param p 价值
+     * @param c 背包总量
+     * @return
+     */
+    public int _01Bages20211202(int[] w, int[] p, int c) {
+        /**
+         * dp[i][j] 表示装前i个物品 背包容量是j的时候能装进去的最大价值
+         * 状态转移方程为 最后一个物品装 或者不装的最大值
+         * dp[i][j] = max(dp[i-1][j-w[i]] + p[i], dp[i-1][j])
+         *
+         */
+        int[][] dp = new int[w.length][c + 1];
+
+        for (int i = 0; i < w.length; i++) {
+            for (int j = 1; j <= c; j++) {
+                if (i == 0 && j >= w[i]) {
+                    if (j >= w[i]) {
+                        dp[i][j] = p[i];
+                        continue;
+                    }
+                }
+                if (j >= w[i]) {
+                    // 能装下
+                    dp[i][j] = Math.max(dp[i - 1][j - w[i]] + p[i], dp[i - 1][j]);
+                } else {
+                    // 装不下
+                    dp[i][j] = dp[i - 1][j];
+                }
             }
         }
         return dp[w.length - 1][c];

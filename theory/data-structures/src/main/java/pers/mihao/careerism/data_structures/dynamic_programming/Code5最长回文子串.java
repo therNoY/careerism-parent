@@ -1,29 +1,27 @@
 package pers.mihao.careerism.data_structures.dynamic_programming;
 
 /**
- * 5. 最长回文子串
- * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
- * 示例 1：
- * 输入: "babad"
- * 输出: "bab"
- * 注意: "aba" 也是一个有效答案。
- * 示例 2：
- * 输入: "cbbd"
- * 输出: "bb"
- * 来源：力扣（LeetCode）
- * 链接：https://leetcode-cn.com/problems/longest-palindromic-substring
+ * 5. 最长回文子串 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。 示例 1： 输入: "babad" 输出: "bab" 注意: "aba" 也是一个有效答案。 示例 2： 输入:
+ * "cbbd" 输出: "bb" 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/longest-palindromic-substring
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ *
+ * @author hspcadmin
  * @see Code516最长回文子序列
  */
 public class Code5最长回文子串 {
 
     public static void main(String[] args) {
         System.out.println(new Code5最长回文子串().longestPalindrome20201021("babad"));
+        System.out.println(new Code5最长回文子串().longestPalindrome20201115("babad"));
     }
 
     public String longestPalindrome(String s) {
-        if (s.length() == 0) return "";
-        if (s.length() == 1) return s;
+        if (s.length() == 0) {
+            return "";
+        }
+        if (s.length() == 1) {
+            return s;
+        }
         /**
          * dp[i][j] 表示从i到j是否是回文子串
          */
@@ -35,11 +33,11 @@ public class Code5最长回文子串 {
                 if (i == j) {
                     // 一样就是回文
                     dp[i][j] = true;
-                    if (r - l< j - i) {
+                    if (r - l < j - i) {
                         l = i;
                         r = j;
                     }
-                }else if (s.charAt(j) == s.charAt(i)) {
+                } else if (s.charAt(j) == s.charAt(i)) {
                     // 如果相同 距离是1那么就是true 否则看中间的是回文
                     if (j - i == 1 || dp[i + 1][j - 1]) {
                         dp[i][j] = true;
@@ -56,13 +54,16 @@ public class Code5最长回文子串 {
 
     /**
      * 动态规划
+     *
      * @param
      * @return
      * @date 20200927
      */
     public String longestPalindrome20200927(String s) {
         int maxLength = Integer.MIN_VALUE, start = 0, end = 0, length;
-        if ((length = s.length()) == 0) return "";
+        if ((length = s.length()) == 0) {
+            return "";
+        }
 
         /**
          * dp[i][j] 表示字符串从i到j是否是回文的
@@ -75,12 +76,12 @@ public class Code5最长回文子串 {
                 if (j - i > 1) {
                     if (chars[i] == chars[j] && dp[i + 1][j - 1]) {
                         dp[i][j] = true;
-                    }else {
+                    } else {
                         dp[i][j] = dp[i + 1][j] || dp[i][j - 1];
                     }
-                }else if (i == j) {
+                } else if (i == j) {
                     dp[i][j] = true;
-                }else if (j - i == 1 && chars[i] == chars[j]) {
+                } else if (j - i == 1 && chars[i] == chars[j]) {
                     dp[i][j] = true;
                 }
                 // 判断是不是最长的字串
@@ -95,21 +96,24 @@ public class Code5最长回文子串 {
 
     /**
      * 动态规划
+     *
      * @param s
      * @return
      * @date 20201021
      */
     public String longestPalindrome20201021(String s) {
         int start = 0, end = 0, length = s.length();
-        if (length == 0) return "";
+        if (length == 0) {
+            return "";
+        }
         boolean[][] dp = new boolean[length][length];
         for (int i = length - 1; i >= 0; i--) {
             for (int j = i; j < length; j++) {
                 if (j == i) {
                     dp[i][j] = true;
-                }else if (i + 1 == j) {
+                } else if (i + 1 == j) {
                     dp[i][j] = s.charAt(i) == s.charAt(j);
-                }else {
+                } else {
                     if (dp[i + 1][j - 1] && s.charAt(i) == s.charAt(j)) {
                         dp[i][j] = true;
                     }
@@ -121,5 +125,34 @@ public class Code5最长回文子串 {
             }
         }
         return s.substring(start, end + 1);
+    }
+
+    /**
+     * DP 思想正确 两个函数 charAt 和 subString 用错
+     * @param s
+     * @return
+     */
+    public String longestPalindrome20201115(String s) {
+        int l = s.length();
+        if (l == 0 || l == 1) return s;
+        /**
+         * dp[i][j]表示 定义为从i到j是否是回文串
+         * 核心是 (dp[i+1][j-1] && s[i] == s[i]) ==> (dp[i][j] == true)
+         */
+        int maxLength = Integer.MIN_VALUE, maxJ = 0, maxI = 0;
+        boolean[][] dp = new boolean[l][l];
+        for (int i = l - 1; i >= 0; i--) {
+            for (int j = i; j < l; j++) {
+                if (i == j) {
+                    dp[i][j] = true;
+                } else if (j - i == 1 || dp[i + 1][j - 1]) {
+                    dp[i][j] = s.charAt(i) == s.charAt(j);
+                }
+                if (dp[i][j] && j - i > maxLength) {
+                    maxLength = (maxJ = j) - (maxI = i);
+                }
+            }
+        }
+        return s.substring(maxI, maxJ + 1);
     }
 }

@@ -1,7 +1,7 @@
 package pers.mihao.careerism.data_structures.dynamic_programming;
 
 /**
- * 416. 分割等和子集
+ * 416. 分割等和子集(0-1背包)
  * 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
  * 每个数组中的元素不会超过 100
  * 数组的大小不会超过 200
@@ -13,12 +13,16 @@ package pers.mihao.careerism.data_structures.dynamic_programming;
  * 输入: [1, 2, 3, 5]
  * 输出: false
  * 解释: 数组不能分割成两个元素和相等的子集.
+ * @author hspcadmin
+ * @see Code322零钱兑换
  */
 public class Code416分割等和子集 {
 
     public static void main(String[] args) {
         System.out.println(new Code416分割等和子集().canPartition(new int[]{1, 5, 11, 5}));
+        System.out.println(new Code416分割等和子集().canPartition20211202(new int[]{1, 5, 11, 5}));
         System.out.println(new Code416分割等和子集().canPartition(new int[]{1, 2, 3, 5}));
+        System.out.println(new Code416分割等和子集().canPartition20211202(new int[]{1, 2, 3, 5}));
     }
 
 
@@ -50,5 +54,36 @@ public class Code416分割等和子集 {
         }
 
         return dp[nums.length][sum2];
+    }
+
+
+    public boolean canPartition20211202(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        if (sum % 2 != 0) return false;
+        sum = sum / 2;
+        /**
+         * dp[i][j] 表示0-i个数 和为j 是否放满
+         */
+        boolean[][] dp = new boolean[nums.length][sum + 1];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 1; j < sum + 1; j++) {
+                if (i == 0) {
+                    if (nums[i] == j) {
+                        dp[i][j] = true;
+                    }
+                    continue;
+                }
+                if (j >= nums[i]) {
+                    dp[i][j] = dp[i - 1][j - nums[i]] || dp[i - 1][j];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+
+            }
+        }
+        return dp[nums.length - 1][sum];
     }
 }

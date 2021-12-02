@@ -9,16 +9,8 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>service-component</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-    <module>mysql</module>
-    <module>zookeeper</module>
-    <module>redis</module>
-    <module>es</module>
-    <module>mq</module>
-    <module>nginx</module>
-  </modules>
+  <groupId>pers.mihao.careerism</groupId>
+  <artifactId>js-web</artifactId>
 
 
 </project>

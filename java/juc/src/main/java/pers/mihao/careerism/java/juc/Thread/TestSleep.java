@@ -1,7 +1,7 @@
 package pers.mihao.careerism.java.juc.Thread;
 
 import java.util.Scanner;
-import util.log.Log;
+import pers.mihao.common.util.log.Log;
 
 public class TestSleep {
 
