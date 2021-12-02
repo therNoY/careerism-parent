@@ -1,0 +1,47 @@
+什么是maven
+Maven 能够帮助开发者完成以下工作：
+构建 Y
+文档生成 N
+报告 Y
+依赖 Y
+SCMs N
+发布 Y
+分发 N
+邮件列表 N
+
+Maven POM
+可以指定以下功能：
+项目依赖 Y
+插件 N
+执行目标 N
+项目构建 profile N
+项目版本 Y (三要素 groupId artifactId version)
+项目开发者列表 Y
+相关邮件列表信息 N
+
+
+maven 生命周期
+验证 validate	验证项目	验证项目是否正确且所有必须信息是可用的
+编译 compile	执行编译	源代码编译在此阶段完成
+测试 Test	测试	使用适当的单元测试框架（例如JUnit）运行测试。
+包装 package	打包	创建JAR/WAR包如在 pom.xml 中定义提及的包
+检查 verify	检查	对集成测试的结果进行检查，以保证质量达标
+安装 install	安装	安装打包的项目到本地仓库，以供其他项目使用
+部署 deploy	部署	拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程
+
+
+父子pom
+
+parent  -> g i
+        -> a i 
+	-> v
+	-> relativePath 父项目的pom.xml文件的相对路径。相对路径允许你选择一个不同的路径。默认值是../pom.xml。Maven首先在构建当前项目的地方寻找父项 
+            目的pom，其次在文件系统的这个位置（relativePath位置），然后在本地仓库，最后在远程仓库寻找父项目的pom
+
+<!--项目引入插件所需要的额外依赖 -->
+  <dependencies>
+    <!--参见dependencies/dependency元素 -->
+    <dependency>
+      
+    </dependency>
+  </dependencies>
