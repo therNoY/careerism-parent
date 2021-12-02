@@ -66,6 +66,8 @@ public class Code377组合总和4 {
          */
         int[][] dp = new int[nums.length][target + 1];
 
+
+        return -1;
     }
 
 }
