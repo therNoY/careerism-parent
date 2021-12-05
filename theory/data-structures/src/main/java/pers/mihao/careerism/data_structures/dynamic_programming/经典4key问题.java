@@ -25,6 +25,12 @@ package pers.mihao.careerism.data_structures.dynamic_programming;
 public class 经典4key问题 {
 
     public static void main(String[] args) {
+        经典4key问题 obj = new 经典4key问题();
+        for (int i = 0; i < 100; i++) {
+            if (obj.getMaxNum(i) != obj.getMaxNum20211203(i)) {
+                System.out.println(i);
+            }
+        }
         System.out.println(new 经典4key问题().getMaxNum(3));
         System.out.println(new 经典4key问题().getMaxNum(7));
     }
@@ -48,5 +54,23 @@ public class 经典4key问题 {
         }
         return max;
 
+    }
+
+
+    public int getMaxNum20211203(int n) {
+        /**
+         * dp[i]表示
+         */
+        int[] dp = new int[n + 1];
+        if (n < 4) return n;
+        for (int i = 1; i < 5; i++) {
+            dp[i] = i;
+        }
+
+        for (int i = 5; i < n + 1; i++) {
+            dp[i] = getMax(dp[i - 3] * 2, dp[i - 2] + 2, dp[i - 1] + 1, dp[i - 4] * 3);
+        }
+
+        return dp[n];
     }
 }

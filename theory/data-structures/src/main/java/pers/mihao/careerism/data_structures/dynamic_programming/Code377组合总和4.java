@@ -28,6 +28,9 @@ public class Code377组合总和4 {
         System.out.println(new Code377组合总和4().combinationSum4(new int[]{
             2, 1, 3
         }, 4));
+        System.out.println(new Code377组合总和4().combinationSum420211202(new int[]{
+            2, 1, 3
+        }, 4));
     }
 
 
@@ -50,24 +53,27 @@ public class Code377组合总和4 {
 
 
     /**
-     * 定义DP
-     * dp[i][j] 使用前i个数组合大小为j的最大组合次数
-     * dp[i][j] = dp[i-1][j] +
-     *
-     * dp[i] 表示使用数组组成大小为i的组合测试
-     * dp[i]
+     * dp[i] 使用前i个数组合大小为target的最大组合次数
+     * dp[i] = Σ dp[i-1]
      * @param nums
      * @param target
      * @return
      */
     public int combinationSum420211202(int[] nums, int target) {
         /**
-         * dp[i][j] 表示
+         * dp[i]：和为 i 的正整数的组合个数。
          */
-        int[][] dp = new int[nums.length][target + 1];
-
-
-        return -1;
+        int[] dp = new int[target + 1];
+        for (int i = 1; i <= target; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[j] < i) {
+                    dp[i] += dp[i - nums[j]];
+                } else if (nums[j] == i) {
+                    dp[i] += 1;
+                }
+            }
+        }
+        return dp[target];
     }
 
 }
