@@ -1,4 +1,6 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming._01背包;
+
+import pers.mihao.careerism.data_structures.dynamic_programming._01背包.Code377组合总和4;
 
 /**
  * 474.一和零 给你一个二进制字符串数组 strs 和两个整数 m 和 n 。 请你找出并返回 strs 的最大子集的长度，该子集中 最多 有 m 个 0 和 n 个 1 。 如果 x 的所有元素也是 y 的元素，集合 x 是集合 y

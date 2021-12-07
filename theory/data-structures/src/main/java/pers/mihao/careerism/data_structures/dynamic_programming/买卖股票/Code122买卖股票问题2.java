@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.买卖股票;
 
 /**
  * 122. 买卖股票的最佳时机 II

@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.买卖股票;
 
 /**
  * 买卖股票问题

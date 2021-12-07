@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.string;
 
 /**
  * 1143. 最长公共子序列

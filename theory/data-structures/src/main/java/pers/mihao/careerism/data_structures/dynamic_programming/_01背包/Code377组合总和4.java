@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming._01背包;
 
 /**
  * 377. 组合总和 Ⅳ

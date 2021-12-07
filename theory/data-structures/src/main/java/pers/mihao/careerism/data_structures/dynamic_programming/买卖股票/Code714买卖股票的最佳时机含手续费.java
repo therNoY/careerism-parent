@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.买卖股票;
 
 /**
  * 714. 买卖股票的最佳时机含手续费

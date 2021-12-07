@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.买卖股票;
 
 /**
  * 309. 最佳买卖股票时机含冷冻期

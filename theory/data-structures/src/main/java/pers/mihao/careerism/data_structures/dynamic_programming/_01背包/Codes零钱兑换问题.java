@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming._01背包;
 
 import java.util.HashMap;
 import java.util.Map;
