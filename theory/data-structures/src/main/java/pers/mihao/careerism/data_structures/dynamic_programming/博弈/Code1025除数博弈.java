@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.博弈;
 
 /**
  * 1025. 除数博弈
@@ -16,11 +16,17 @@ package pers.mihao.careerism.data_structures.dynamic_programming;
  * 输入：3
  * 输出：false
  * 解释：爱丽丝选择 1，鲍勃也选择 1，然后爱丽丝无法进行操作。
+ * https://leetcode-cn.com/problems/divisor-game/submissions/
  */
 public class Code1025除数博弈 {
 
     public static void main(String[] args) {
         System.out.println(new Code1025除数博弈().divisorGame(4));
+        System.out.println(new Code1025除数博弈().divisorGame(5));
+        System.out.println(new Code1025除数博弈().divisorGame(6));
+        System.out.println(new Code1025除数博弈().divisorGame20211206(4));
+        System.out.println(new Code1025除数博弈().divisorGame20211206(5));
+        System.out.println(new Code1025除数博弈().divisorGame20211206(6));
     }
 
     public boolean divisorGame(int N) {
@@ -39,6 +45,27 @@ public class Code1025除数博弈 {
             }
         }
         return dp[N - 1];
+    }
+
+    public boolean divisorGame20211206(int n) {
+        /**
+         * dp[i][0] 表示数为i时对方选我是否能赢
+         * dp[i][1] 表示数字为i时我选我是否能赢
+         */
+        boolean[][] dp = new boolean[n + 1][2];
+        if (n == 1) return false;
+        dp[1][0] = true;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j < i; j++) {
+                if (i % j == 0 && dp[i - j][0]) {
+                    dp[i][1] = true;
+                    break;
+                }
+            }
+            dp[i][0] = !dp[i][1];
+        }
+
+        return dp[n][1];
     }
 
 

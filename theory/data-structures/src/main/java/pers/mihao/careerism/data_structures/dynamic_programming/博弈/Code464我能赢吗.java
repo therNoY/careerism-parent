@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.博弈;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,6 +166,11 @@ public class Code464我能赢吗 {
             canChoiceList.add(i);
         }
         return !isFirst;
+    }
+
+
+    public boolean canIWin20211205(int maxChoosableInteger, int desiredTotal) {
+        return false;
     }
 
 }
