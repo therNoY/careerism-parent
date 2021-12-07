@@ -1,7 +1,10 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.买卖股票;
 
 /**
  * 买卖股票问题
+ * @see Code121买卖股票问题
+ * @see Code122买卖股票问题2
+ * @see Code122买卖股票问题2
  */
 public class Codes买卖股票问题 {
 
@@ -145,7 +148,7 @@ public class Codes买卖股票问题 {
             for (int j = 1; j <= k; j++) {
                 dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);
                 dp[i][j][1] = Math.max(dp[i - 1][j - 1][0] - prices[i], dp[i - 1][j][1]);
-                max = max < dp[i][j][0] ? dp[i][j][0] : max;
+                max = Math.max(max, dp[i][j][0]);
             }
         }
         return max > 0 ? max : 0;

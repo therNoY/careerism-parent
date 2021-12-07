@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming._01背包;
 
 /**
  * 假定有一个容量固定背包 有若干个重量和价值不相等的物品

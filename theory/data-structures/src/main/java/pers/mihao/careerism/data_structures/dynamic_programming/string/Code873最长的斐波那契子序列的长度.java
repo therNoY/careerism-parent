@@ -1,10 +1,7 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.string;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 873. 最长的斐波那契子序列的长度 如果序列 X_1, X_2, ..., X_n 满足下列条件，就说它是 斐波那契式 的：

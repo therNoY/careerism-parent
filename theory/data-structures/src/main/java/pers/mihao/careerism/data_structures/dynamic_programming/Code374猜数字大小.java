@@ -1,33 +1,48 @@
 package pers.mihao.careerism.data_structures.dynamic_programming;
 
 /**
- * 我们正在玩一个猜数字游戏。 游戏规则如下：
- * 我从 1 到 n 选择一个数字。 你需要猜我选择了哪个数字。
- * 每次你猜错了，我会告诉你这个数字是大了还是小了。
- * 你调用一个预先定义好的接口 guess(int num)，它会返回 3 个可能的结果（-1，1 或 0）：
- * <p>
- * -1 : 我的数字比较小
- * 1 : 我的数字比较大
- * 0 : 恭喜！你猜对了！
- *  
- * <p>
- * 示例 :
- * <p>
- * 输入: n = 10, pick = 6
- * 输出: 6
- * <p>
- * 来源：力扣（LeetCode）
- * 链接：https://leetcode-cn.com/problems/guess-number-higher-or-lower
- * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ * 374. 猜数字大小
+ * 猜数字游戏的规则如下：
+ * 每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。
+ * 如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。
+ * 你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：
+ * -1：我选出的数字比你猜的数字小 pick < num
+ * 1：我选出的数字比你猜的数字大 pick > num
+ * 0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num
+ * 返回我选出的数字。
+ * 示例 1：
+ * 输入：n = 10, pick = 6
+ * 输出：6
+ * 示例 2：
+ * 输入：n = 1, pick = 1
+ * 输出：1
+ * 示例 3：
+ * 输入：n = 2, pick = 1
+ * 输出：1
+ * 示例 4：
+ * 输入：n = 2, pick = 2
+ * 输出：2
  */
 public class Code374猜数字大小 {
 
+    int guess = Integer.MAX_VALUE;
+
     public static void main(String[] args) {
-        System.out.println(new Code374猜数字大小().getMoneyAmount2(10));
+        System.out.println(new Code374猜数字大小().guessNumber(Integer.MAX_VALUE));
+//        System.out.println(new Code374猜数字大小().getMoneyAmount2(10));
     }
 
-    int guess(int num) {
-        return -1;
+    public int guessNumber(int n) {
+        long guessNum, guessRes, start = 0, end = n;
+        while ((guessRes = guess((int) (guessNum = (end - start + 1) / 2 + start))) != 0) {
+            if (guessRes < 0) end = guessNum;
+            else start = guessNum;
+        }
+        return (int) guessNum;
+    }
+
+    int guess(int pick) {
+        return Integer.compare(guess, pick);
     }
 
     /**

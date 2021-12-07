@@ -70,4 +70,20 @@ public class Code91解码方法 {
         return dp[s.length() - 1];
 
     }
+
+    public int numDecodings20211207(String s) {
+        int l = s.length();
+        if (l == 1) return 1;
+        if (l == 2) return Integer.parseInt(s) < 27 ? 2 : 1;
+        int[] dp = new int[l];
+        for (int i = 2; i < l; i++) {
+            if (s.charAt(i) > 54 || s.charAt(i - 1) > 49) {
+                dp[i] = dp[i - 1];
+            } else {
+                dp[i] = Math.max(dp[i - 1], dp[i - 2] + 1);
+            }
+        }
+        return dp[l - 1];
+    }
+
 }

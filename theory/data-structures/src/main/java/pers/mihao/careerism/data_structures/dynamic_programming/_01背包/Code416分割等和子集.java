@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming._01背包;
 
 /**
  * 416. 分割等和子集(0-1背包)

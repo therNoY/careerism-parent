@@ -27,9 +27,11 @@ package pers.mihao.careerism.data_structures.dynamic_programming;
 public class Code72编辑距离 {
 
     public static void main(String[] args) {
-        String word1 = "intention", word2 = "execution";
+//        String word1 = "intention", word2 = "execution";
 //        String word1 = "horse", word2 = "ros";
-        System.out.println(new Code72编辑距离().minDistance(word1, word2));
+        String word1 = "", word2 = "";
+//        System.out.println(new Code72编辑距离().minDistance(word1, word2));
+        System.out.println(new Code72编辑距离().minDistance20211203(word1, word2));
 
     }
 
@@ -60,25 +62,7 @@ public class Code72编辑距离 {
         }
         return dp[word1.length() - 1][word2.length() - 1];
     }
-    public int minDistance2(String word1, String word2) {
-        int[][] dp = new int[word1.length() + 1][word2.length() + 1];
-        for (int i = 0; i <= word1.length() ; i++) {
-            for (int j = 0; j <= word2.length(); j++) {
-                if (i == 0) {
-                    dp[0][j] = j;
-                    continue;
-                }
-                if (j == 0) {
-                    dp[i][0] = i;
-                    continue;
-                }
-                if (word1.charAt(i - 1) == word2.charAt(j - 1)) dp[i][j] = dp[i-1][j-1];
-                else dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1;
-            }
-        }
 
-        return dp[word1.length()][word2.length()];
-    }
 
     private int min(int i, int i1, int i2) {
         int min = i;
@@ -87,5 +71,37 @@ public class Code72编辑距离 {
         return min;
     }
 
+
+    /**
+     * 完成 差一点就是没有考虑到替换
+     * @param word1
+     * @param word2
+     * @return
+     */
+    public int minDistance20211203(String word1, String word2){
+        int wl1 = word1.length(), wl2 = word2.length();
+        if (wl1 == 0 || wl2 == 0) return Math.max(wl1, wl2);
+        /**
+         * dp[i][j] 表示字符串word1 0-i 与 字符串word2 0-j 的最小编辑距离
+         */
+        int[][] dp = new int[wl1][wl2];
+        for (int i = 0; i < wl1; i++) {
+            for (int j = 0; j < wl2; j++) {
+                boolean isSame = word1.charAt(i) == word2.charAt(j);
+                if (i == 0 && j == 0) {
+                    dp[i][j] = isSame ? 0 : 1;
+                } else if (i == 0) {
+                    dp[i][j] = isSame ? j : Math.min(j, dp[i][j - 1]) + 1;
+                } else if (j == 0) {
+                    dp[i][j] = isSame ? i : Math.min(i, dp[i - 1][j]) + 1;
+                } else if (isSame) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1;
+                }
+            }
+        }
+        return dp[wl1 - 1][wl2 - 1];
+    }
 
 }

@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.路径;
 
 /**
  * 70. 爬楼梯
@@ -32,6 +32,9 @@ public class Code70爬楼梯 {
 
     public static void main(String[] args) {
 
+        System.out.println(new Code70爬楼梯().climbStairs(3));
+        System.out.println(new Code70爬楼梯().climbStairs20211206(3));
+
     }
 
     public int climbStairs(int n) {
@@ -43,5 +46,20 @@ public class Code70爬楼梯 {
             s2 = s;
         }
         return s;
+    }
+
+
+    public int climbStairs20211206(int n) {
+        /**
+         * dp[i]表示前i台阶需要多少种方法
+         */
+        int[] dp = new int[n + 1];
+        if (n <= 2) return n;
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
     }
 }

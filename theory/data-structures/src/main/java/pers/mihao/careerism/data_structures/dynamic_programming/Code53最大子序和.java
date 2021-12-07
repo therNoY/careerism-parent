@@ -18,6 +18,7 @@ public class Code53最大子序和 {
     public static void main(String[] args) {
         System.out.println(new Code53最大子序和().maxSubArray2(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
         System.out.println(new Code53最大子序和().maxSubArray3(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        System.out.println(new Code53最大子序和().maxSubArray20211206(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
     }
 
     public int maxSubArray(int[] nums) {
@@ -63,15 +64,36 @@ public class Code53最大子序和 {
     }
 
     /**
-     * 使用滑动窗口 只有左边的和有益的时候才计算
+     * 使用滑动窗口 只有左边的和有益的时候才计算游标
      */
     public int maxSubArray3(int[] nums) {
         if (nums.length == 0) return 0;
-        int right = 0, sum = 0, max = Integer.MIN_VALUE;
-        while (right < nums.length) {
-            sum += nums[right++];
+        int cursor = 0, sum = 0, max = Integer.MIN_VALUE;
+        while (cursor < nums.length) {
+            sum += nums[cursor++];
             max = Math.max(max, sum);
             if (sum <= 0) sum = 0;
+        }
+        return max;
+    }
+
+    public int maxSubArray20211206(int[] nums) {
+        int l = nums.length;
+        /**
+         * dp[i][j] 表示长度i-j的和
+         */
+        int[][] dp = new int[l][l];
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < l; i++) {
+            for (int j = i; j < l; j++) {
+                if (i == j) {
+                    dp[i][j] = nums[i];
+                } else {
+                    dp[i][j] = dp[i][j - 1] + nums[j];
+                }
+                max = Math.max(max, dp[i][j]);
+            }
         }
         return max;
     }

@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.打家劫舍;
 
 import pers.mihao.careerism.data_structures.util.TreeNode;
 
