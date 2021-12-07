@@ -60,7 +60,7 @@ public class Code464我能赢吗 {
         for (int i = 1; i <= maxChoosableInteger; i++) {
             temp = 1 << (i - 1);
             if ((temp & status) == 0) {
-                if (desiredTotal -i <= 0 || !dfs(maxChoosableInteger, desiredTotal - i, temp | status, dp)){
+                if (desiredTotal - i <= 0 || !dfs(maxChoosableInteger, desiredTotal - i, temp | status, dp)){
                     dp[status] = true;
                     return true;
                 }
@@ -170,7 +170,20 @@ public class Code464我能赢吗 {
 
 
     public boolean canIWin20211205(int maxChoosableInteger, int desiredTotal) {
-        return false;
+        /**
+         * do[i][j][0] 表示 在i个数合为j先手能否赢
+         */
+        boolean [][][] dp = new boolean[maxChoosableInteger][desiredTotal][2];
+
+        for (int i = 0; i < maxChoosableInteger; i++) {
+            for (int j = 0; j < desiredTotal; j++) {
+                for (int k = 0; k < i; k++) {
+                }
+                dp[i][j][1] = !dp[i][j][0];
+            }
+        }
+
+        return dp[maxChoosableInteger - 1][desiredTotal - 1][0];
     }
 
 }
