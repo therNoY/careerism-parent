@@ -21,11 +21,9 @@ package pers.mihao.careerism.data_structures.dynamic_programming;
 public class Code91解码方法 {
 
     public static void main(String[] args) {
-//        System.out.println(new Code91解码方法().numDecodings("17"));
-//        System.out.println(new DecodeWays().numDecodings("10"));
-//        System.out.println(new DecodeWays().numDecodings("120"));
-//        System.out.println(new DecodeWays().numDecodings("12"));
-        System.out.println(new Code91解码方法().numDecodings20211207("226"));
+//        System.out.println(new Code91解码方法().numDecodings20211208("17"));
+//        System.out.println(new Code91解码方法().numDecodings20211208("2611055971756562"));
+        System.out.println(new Code91解码方法().numDecodings20211208("30"));
     }
 
 
@@ -33,29 +31,29 @@ public class Code91解码方法 {
         return -1;
     }
 
-    public int numDecodings20211207(String s) {
+
+    public int numDecodings20211208(String s) {
         int l = s.length();
-        if (l == 1) return 1;
-        if (l == 2) return Integer.parseInt(s) < 27 ? 2 : 1;
-        /**
-         * dp[i][0] 最后一位单独解 的长度
-         * dp[i][1] 最后一位不单独解 的长度
-         */
-        int[][] dp = new int[l][2];
-        dp[0][0] = 1;
-        dp[0][1] = 0;
-        dp[1][0] = 1;
-        dp[1][1] = Integer.parseInt(s.substring(0, 2)) < 27 ? 2 : 1;
-        for (int i = 2; i < l; i++) {
-            if (s.charAt(i) > 54 || s.charAt(i - 1) > 50) {
-                dp[i][0] = Integer.max(dp[i - 1][0], dp[i - 1][1]);
-                dp[i][1] = 0;
-            } else {
-                dp[i][0] = Integer.max(dp[i - 1][0], dp[i - 1][1]);
-                dp[i][1] = dp[i - 2][1] + 2;
+        for (int i = 0; i < l; i++) {
+            if (s.charAt(i) == 48 && (i == 0 || (s.charAt(i - 1) != 49 && s.charAt(i - 1) != 50))) {
+                return 0;
             }
         }
-        return Integer.max(dp[l - 1][0], dp[l - 1][1]);
+        if (l == 1) return 1;
+        if (l == 2) return (Integer.parseInt(s) < 27 && s.charAt(1) != 48) ? 2 : 1;
+        int[] dp = new int[l];
+        dp[0] = 1;
+        dp[1] = (Integer.parseInt(s.substring(0 , 2)) < 27 && s.charAt(1) != 48) ? 2 : 1;
+        for (int i = 2; i < l; i++) {
+            if ((s.charAt(i) > 54 && s.charAt(i - 1) != 49) || s.charAt(i - 1) > 50 || s.charAt(i - 1) == 48) {
+                dp[i] = dp[i - 1];
+            } else if (s.charAt(i) == 48) {
+                dp[i] = dp[i - 2];
+            } else {
+                dp[i] = dp[i - 1] + dp[i - 2];
+            }
+        }
+        return dp[l - 1];
     }
 
 }

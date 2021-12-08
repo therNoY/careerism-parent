@@ -22,6 +22,9 @@ public class Code96不同的二叉搜索树 {
     public static void main(String[] args) {
         System.out.println(numTrees(3));
         System.out.println(numTrees(4));
+        System.out.println(new Code96不同的二叉搜索树().numTrees20211208(3));
+        System.out.println(new Code96不同的二叉搜索树().numTrees20211208(4));
+
     }
 
     public static int numTrees(int n) {
@@ -39,4 +42,24 @@ public class Code96不同的二叉搜索树 {
         return dp[n];
     }
 
+
+    /**
+     * 明确定义 左边的一定小 右边的一定大
+     * @param n
+     * @return
+     */
+    public int numTrees20211208(int n) {
+        if (n <= 2) return n;
+        /**
+         * dp[i] 表示数量为i的二叉搜索树最大值(数字都是不一样的 所以最大值 只取决于数量)
+         */
+        int[] dp = new int[n + 1];
+        dp[0] = dp[1] = 1;
+        for (int i = 2; i < n + 1; i++) {
+            for (int j = 0; j < i; j++) {
+                dp[i] += dp[j] * dp[i - j - 1];
+            }
+        }
+        return dp[n];
+    }
 }
