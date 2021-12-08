@@ -45,6 +45,20 @@ public class Code174地下城游戏 {
                 {100}
         }));
 
+
+        System.out.println(new Code174地下城游戏().calculateMinimumHP20211208(new int[][]{
+                {-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}
+        }));
+
+
+        System.out.println(new Code174地下城游戏().calculateMinimumHP20211208(new int[][]{
+                {0, -3}
+        }));
+
+        System.out.println(new Code174地下城游戏().calculateMinimumHP20211208(new int[][]{
+                {100}
+        }));
+
     }
 
     public int calculateMinimumHP(int[][] dungeon) {
@@ -53,12 +67,11 @@ public class Code174地下城游戏 {
         if (m == 0) return 0;
 
         /**
-         * dp[i][j]表示 从ij点到达终点需要的最小生命值
+         * dp[i][j]表示 从mn点到达ij需要的最小生命值
          */
         int dp[][] = new int[m][n];
         for (int i = m - 1; i >= 0; i--) {
             for (int j = n - 1; j >= 0; j--) {
-
                 if (i == m - 1 && j == n - 1) {
                     dp[i][j] = Math.max(0 - dungeon[i][j], 0);
                 } else if (i == m - 1) {
@@ -76,92 +89,23 @@ public class Code174地下城游戏 {
 
     }
 
-    public int calculateMinimumHP2(int[][] dungeon) {
 
-        int m = dungeon.length;
-        int n = dungeon[0].length;
 
-        if (m == 0) return 0;
 
+
+
+
+
+
+
+
+    public int calculateMinimumHP20211208(int[][] dungeon) {
+        int m = dungeon.length, n = dungeon[0].length;
         /**
-         * 到达第ij个点需要的最小生命值和剩余生命
+         * dp[i][j][0]从00-ij至少需要多少血
+         * dp[i][j][1]从00-ij剩余多少血
          */
-        Knight knight[][] = new Knight[m][n];
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == 0 && j == 0) {
-                    Knight k = new Knight();
-                    if (dungeon[0][0] <= 0) {
-                        k.minLeft = 1 - dungeon[0][0];
-                        k.currentLeft = 1;
-                    } else {
-                        k.minLeft = 1;
-                        k.currentLeft = dungeon[0][0] + 1;
-                    }
-                    knight[i][j] = k;
-                } else if (i == 0) {
-                    Knight k = new Knight();
-                    Knight u = knight[i][j - 1];
-                    if (u.currentLeft + dungeon[i][j] > 0) {
-                        k.minLeft = u.minLeft;
-                        k.currentLeft = u.currentLeft + dungeon[i][j];
-                    } else {
-                        k.minLeft = Math.max(u.minLeft - (u.currentLeft + dungeon[i][j]) + 1, u.minLeft);
-                        k.currentLeft = 1;
-                    }
-                    knight[i][j] = k;
-                } else if (j == 0) {
-                    Knight k = new Knight();
-                    Knight l = knight[i - 1][j];
-                    if (l.currentLeft + dungeon[i][j] > 0) {
-                        k.minLeft = l.minLeft;
-                        k.currentLeft = l.currentLeft + dungeon[i][j];
-                    } else {
-                        k.minLeft = Math.max(l.minLeft - (l.currentLeft + dungeon[i][j]) + 1, l.minLeft);
-                        k.currentLeft = 1;
-                    }
-                    knight[i][j] = k;
-                } else {
-                    Knight k = new Knight();
-                    Knight l = knight[i][j - 1];
-                    Knight u = knight[i - 1][j];
-
-                    int lm, um, lc, uc;
-
-                    if (l.currentLeft + dungeon[i][j] > 0) {
-                        lm = l.minLeft;
-                        lc = l.currentLeft + dungeon[i][j];
-                    } else {
-                        lm = Math.max(l.minLeft - (l.currentLeft + dungeon[i][j]) + 1, l.minLeft);
-                        lc = 1;
-                    }
-
-                    if (u.currentLeft + dungeon[i][j] > 0) {
-                        um = u.minLeft;
-                        uc = u.currentLeft + dungeon[i][j];
-                    } else {
-                        um = Math.max(u.minLeft - (u.currentLeft + dungeon[i][j]) + 1, u.minLeft);
-                        uc = 1;
-                    }
-
-                    if (lm < um) {
-                        k.minLeft = lm;
-                        k.currentLeft = lc;
-                    } else {
-                        k.minLeft = um;
-                        k.currentLeft = uc;
-                    }
-                    knight[i][j] = k;
-                }
-            }
-        }
-
-        return knight[m - 1][n - 1].minLeft;
-    }
-
-    class Knight {
-        int minLeft;
-        int currentLeft;
+        int[][][] dp = new int[m][n][2];
+        return dp[m - 1][n - 1][0];
     }
 }

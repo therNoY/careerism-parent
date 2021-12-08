@@ -45,6 +45,10 @@ public class Code983最低票价 {
         System.out.println(new Code983最低票价().mincostTickets(
                 new int[]{1, 4, 6, 7, 8, 20},
                 new int[]{2, 7, 15}));
+
+        System.out.println(new Code983最低票价().mincostTickets20211208(
+                new int[]{1, 4, 6, 7, 8, 20},
+                new int[]{2, 7, 15}));
     }
 
     public int mincostTickets(int[] days, int[] costs) {
@@ -66,6 +70,32 @@ public class Code983最低票价 {
                         i >= 7 ? dp[i - 7] + costs[1] : costs[1],
                         i >= 30 ? dp[i - 30] + costs[2] : costs[2]
                 ));
+            }
+        }
+        return dp[365];
+    }
+
+
+
+
+
+
+    public int mincostTickets20211208(int[] days, int[] costs) {
+        /**
+         * 前i天的最小花费
+         */
+        int[] dp = new int[366];
+        for (int i = 0; i < days.length; i++) {
+            dp[days[i]] = 1;
+        }
+        for (int i = 1; i <= 365; i++) {
+            if (i == 1) {
+                dp[i] = dp[i] == 1 ? costs[0] : 0;
+            } else if (dp[i] == 1) {
+                dp[i] = Math.min(Math.min(dp[i - 1] + costs[0],  (i > 7 ? dp[i - 7] : 0) + costs[1]),
+                        (i > 30 ? dp[i - 30] : 0) + costs[2]);
+            } else {
+                dp[i] = dp[i - 1];
             }
         }
         return dp[365];

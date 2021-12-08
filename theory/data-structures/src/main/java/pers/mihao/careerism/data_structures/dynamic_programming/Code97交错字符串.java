@@ -18,6 +18,8 @@ public class Code97交错字符串 {
     public static void main(String[] args) {
         System.out.println(isInterleave("aabcc", "dbbca", "aadbbcbcac"));
         System.out.println(isInterleave("aabcc", "dbbca", "aadbbbaccc"));
+        System.out.println(new Code97交错字符串().isInterleave20211208l("aabcc", "dbbca", "aadbbcbcac"));
+        System.out.println(new Code97交错字符串().isInterleave20211208l("aabcc", "dbbca", "aadbbbaccc"));
     }
 
     public static boolean isInterleave(String s1, String s2, String s3) {
@@ -25,6 +27,9 @@ public class Code97交错字符串 {
         int s2L = s2.length();
         int s3L = s3.length();
         if (s1L + s2L != s3L) return false;
+        /**
+         * dp[i][j] 表示前i个s1的字符串 和 前j个s2的字符串能否构成 前i+j的s3的字符串
+         */
         boolean[][] dp = new boolean[s1L + 1][s2L + 1];
 
         dp[0][0] = true;
@@ -44,7 +49,36 @@ public class Code97交错字符串 {
     }
 
 
-    public boolean isInterleave202112(String s1, String s2, String s3) {
 
+    public boolean isInterleave20211208l(String s1, String s2, String s3) {
+        /**
+         * dp[i][j][k]表示长度 i->j是否能组成k
+         */
+        boolean[][][] dp = new boolean[s1.length() + 1][s2.length() + 1][s3.length() + 1];
+
+        for (int i = 0; i < s1.length() + 1; i++) {
+            for (int j = 0; j < s2.length() + 1; j++) {
+                for (int k = 0; k < s3.length() + 1; k++) {
+                    if (i + j == k){
+                        if (i == 0 && j == 0 && k == 0){
+                            dp[i][j][k] = true;
+                        } else if (i == 0) {
+                            dp[i][j][k] = dp[i][j - 1][k - 1] && s2.charAt(j - 1) == s3.charAt(k - 1);
+                        } else if (j == 0) {
+                            dp[i][j][k] = dp[i - 1][j][k - 1] && s1.charAt(i - 1) == s3.charAt(k - 1);
+                        } else if (s1.charAt(i - 1) == s3.charAt(k - 1) && s2.charAt(j - 1) == s3.charAt(k - 1)) {
+                            dp[i][j][k] = dp[i - 1][j][k - 1] || dp[i][j - 1][k - 1];
+                        } else if (s1.charAt(i - 1) == s3.charAt(k - 1)) {
+                            dp[i][j][k] = dp[i - 1][j][k - 1];
+                        } else if (s2.charAt(j - 1) == s3.charAt(k - 1)) {
+                            dp[i][j][k] = dp[i][j - 1][k - 1];
+                        } else {
+                            dp[i][j][k] = false;
+                        }
+                    }
+                }
+            }
+        }
+        return dp[s1.length()][s2.length()][s3.length()];
     }
 }
