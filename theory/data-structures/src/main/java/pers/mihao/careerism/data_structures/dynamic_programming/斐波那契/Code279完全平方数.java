@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.斐波那契;
 
 /**
  * 279. 完全平方数
@@ -50,5 +50,25 @@ public class Code279完全平方数 {
         return dp[n];
     }
 
+
+    public int numSquares20211210(int n) {
+        /**
+         * dp[i] 表示最小的完全平方数
+         */
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        double temp;
+        for (int i = 2; i < n + 1; i++) {
+            if (((temp = Math.pow(i, 0.5)) - (int) temp) == 0) {
+                dp[i] = 1;
+                continue;
+            }
+            dp[i] = Integer.MAX_VALUE;
+            for (int j = 1; j < (i / 2) + 1; j++) {
+                dp[i] = Math.min(dp[i], dp[i - j] + dp[j]);
+            }
+        }
+        return dp[n];
+    }
 
 }

@@ -1,4 +1,4 @@
-package pers.mihao.careerism.data_structures.dynamic_programming;
+package pers.mihao.careerism.data_structures.dynamic_programming.斐波那契;
 
 /**
  * 343. 整数拆分
@@ -36,6 +36,22 @@ public class Code343整数拆分 {
             for (int j = 1; j <= i / 2; j++) {
                 // 最大数是所有可能的求和最大乘机
                 dp[i] = Math.max(Math.max(j, dp[j]) * Math.max(i - j, dp[i - j]), dp[i]);
+            }
+        }
+        return dp[n];
+    }
+
+
+    public int integerBreak20211210(int n) {
+        if (n == 1) return 1;
+        /**
+         * dp[i]表示值为i的最大值
+         */
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        for (int i = 2; i < n + 1; i++) {
+            for (int j = 1; j < (i / 2) + 1; j++) {
+                dp[i] = Math.max(dp[i], Math.max(dp[i - j], i - j) * Math.max(j, dp[j]));
             }
         }
         return dp[n];

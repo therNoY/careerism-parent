@@ -62,29 +62,7 @@ public class Code374猜数字大小 {
      * 链接：https://leetcode-cn.com/problems/guess-number-higher-or-lower-ii
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
-    public int getMoneyAmount(int n) {
-        int[][] dp = new int[n + 1][n + 1];
-        // i = y j = x i > j
-        for (int l = 1; l < n; l++) {
-            for (int s = l; s >= 1; s--) {
-                if (l == s) {
-                    dp[s][s] = 0;
-                } else if (l - s == 1) {
-                    dp[s][l] = s;
-                } else {
-                    int min = Integer.MAX_VALUE;
-                    for (int k = s; k <= l; k++) {
-                        min = Math.min(Math.max(dp[s][k - 1], dp[k + 1][l]) + k, min);
-                    }
-                    dp[s][l] = min;
-                }
-            }
-        }
 
-        return dp[1][n];
-
-
-    }
 
     public int getMoneyAmount2(int n) {
         int[][] dp = new int[n + 2][n + 2];

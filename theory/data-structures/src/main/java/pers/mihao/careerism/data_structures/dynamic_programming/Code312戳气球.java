@@ -54,5 +54,28 @@ public class Code312戳气球 {
         return dp[0][newNums.length - 1];
     }
 
+    public int maxCoins20211209(int[] nums) {
+        int[] newNums = new int[nums.length + 2];
+        System.arraycopy(nums, 0, newNums, 1, nums.length);
+        newNums[0] = newNums[newNums.length - 1] = 1;
+        /**
+         * dp[i][j]表示插入 i-j之间的气球最大值 不戳ij
+         */
+        int[][] dp = new int[newNums.length][newNums.length];
+
+        for (int i = newNums.length; i >= 0; i--) {
+            for (int j = i + 1; j < newNums.length; j++) {
+                if (j - i == 2) {
+                    dp[i][j] = newNums[i + 1] * newNums[i] * newNums[j];
+                } else {
+                    for (int k = i + 1; k < j; k++) {
+                        dp[i][j] = Math.max(dp[i][j], dp[i][k] + dp[k][j] + newNums[k] * newNums[k - 1] * newNums[k + 1]);
+                    }
+                }
+            }
+        }
+        return dp[0][newNums.length - 1];
+    }
+
 
 }

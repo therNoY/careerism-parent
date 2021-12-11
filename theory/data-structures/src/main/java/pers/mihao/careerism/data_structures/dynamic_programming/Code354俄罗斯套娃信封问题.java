@@ -1,5 +1,7 @@
 package pers.mihao.careerism.data_structures.dynamic_programming;
 
+import pers.mihao.careerism.data_structures.util.RunUtil;
+
 /**
  * 354. 俄罗斯套娃信封问题
  * 给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。
@@ -14,7 +16,8 @@ package pers.mihao.careerism.data_structures.dynamic_programming;
 public class Code354俄罗斯套娃信封问题 {
 
     public static void main(String[] args) {
-        System.out.println(maxEnvelopes(new int[][]{{5,4},{6,4},{6,7},{2,3}}));
+//        System.out.println(maxEnvelopes(new int[][]{{5,4},{6,4},{6,7},{2,3}}));
+        System.out.println(new Code354俄罗斯套娃信封问题().maxEnvelopes20211211(new int[][]{{5, 4}, {6, 4}, {6, 7}, {2, 3}}));
     }
 
     /**
@@ -81,5 +84,29 @@ public class Code354俄罗斯套娃信封问题 {
         int[] temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
+    }
+
+
+    /**
+     * 先进行排序 在求上升子序列 这样直接求不行
+     * @param envelopes
+     * @return
+     */
+    public int maxEnvelopes20211211(int[][] envelopes) {
+        int l = envelopes.length, max = 0;
+        /**
+         * 以dp[i]为最大信封的长度
+         */
+        int[] dp = new int[l];
+        for (int i = 0; i < l; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (envelopes[i][0] > envelopes[j][0] && envelopes[i][1] > envelopes[j][1]) {
+                    dp[i] = Math.max(dp[j] + 1, dp[i]);
+                }
+            }
+            max = Math.max(dp[i], max);
+        }
+        return max;
     }
 }

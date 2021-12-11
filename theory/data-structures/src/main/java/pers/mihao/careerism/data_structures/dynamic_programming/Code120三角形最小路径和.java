@@ -81,4 +81,27 @@ public class Code120三角形最小路径和 {
         }
         return min;
     }
+
+
+    public int minimumTotal201212110(List<List<Integer>> triangle) {
+        int s = triangle.size(), min = Integer.MAX_VALUE;
+        int[][] dp = new int[s][s];
+        if (s == 1) return triangle.get(0).get(0);
+        dp[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < s; i++) {
+            for (int j = 0; j <= i; j++) {
+                if (j == 0) {
+                    dp[i][j] = dp[i - 1][j] + triangle.get(i).get(j);
+                } else if (j == i) {
+                    dp[i][j] = dp[i - 1][j - 1] + triangle.get(i).get(j);
+                } else {
+                    dp[i][j] = Math.min(dp[i - 1][j - 1], dp[i - 1][j]) + triangle.get(i).get(j);
+                }
+                if (i == s - 1) {
+                    min = Math.min(dp[i][j], min);
+                }
+            }
+        }
+        return min;
+    }
 }

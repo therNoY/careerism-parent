@@ -92,21 +92,28 @@ public class Code139单词拆分 {
     }
 
 
-    public boolean myWordBreak(String s, List<String> wordDict, Map<String, Boolean> map) {
-        if (map.containsKey(s)) {
-            return map.get(s);
-        }
-        if (s.equals("") || wordDict.contains(s)) {
-            return true;
-        }
-        for (int i = 1; i < s.length() + 1; i++) {
-            if (wordDict.contains(s.substring(0, i)) && wordBreak(s.substring(i), wordDict)) {
-                map.put(s, Boolean.TRUE);
-                return true;
+    /**
+     * 多了一维
+     * @param s
+     * @param wordDict
+     * @return
+     */
+    public boolean wordBreak20211210(String s, List<String> wordDict) {
+        Set<String> dictMap = new HashSet<>(wordDict);
+        /**
+         * dp[i][j]长度为0-j是否能组成
+         */
+        boolean[][] dp = new boolean[s.length()][s.length()];
+        for (int i = s.length(); i >= 0; i--) {
+            for (int j = i; j < s.length(); j++) {
+                dp[i][j] = dictMap.contains(s.substring(i, j + 1));
+                for (int k = i; k < j; k++) {
+                    if (dp[i][j]) break;
+                    dp[i][j] = dp[i][k] && dp[k + 1][j];
+                }
             }
         }
-        map.put(s, Boolean.FALSE);
-        return false;
+        return dp[0][s.length() - 1];
     }
 
 }

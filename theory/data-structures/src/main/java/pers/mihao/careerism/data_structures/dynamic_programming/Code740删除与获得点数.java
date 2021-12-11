@@ -1,6 +1,8 @@
 package pers.mihao.careerism.data_structures.dynamic_programming;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 740. 删除与获得点数
@@ -37,7 +39,9 @@ public class Code740删除与获得点数 {
 
     public static void main(String[] args) {
         System.out.println(new Code740删除与获得点数().deleteAndEarn(new int[]{2, 2, 3, 3, 3, 4}));
+        System.out.println(new Code740删除与获得点数().deleteAndEarn20211211(new int[]{2, 2, 3, 3, 3, 4}));
         System.out.println(new Code740删除与获得点数().deleteAndEarn(new int[]{3, 1}));
+        System.out.println(new Code740删除与获得点数().deleteAndEarn20211211(new int[]{3, 1}));
     }
 
     public int deleteAndEarn(int[] nums) {
@@ -78,5 +82,36 @@ public class Code740删除与获得点数 {
         }
         return Math.max(dp[distinctNums.length - 1][0], dp[distinctNums.length - 1][1]);
 
+    }
+
+
+    public int deleteAndEarn20211211(int[] nums) {
+        Arrays.sort(nums);
+        int size = (int) Arrays.stream(nums).distinct().count();
+        int[] numArray = new int[size];
+        int[] countArray = new int[size];
+        int lastNum = nums[0], cursor = 0;
+        numArray[0] = lastNum;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == lastNum) {
+                countArray[cursor]++;
+            } else {
+                numArray[++cursor] = nums[i];
+                countArray[cursor] = 1;
+                lastNum = nums[i];
+            }
+        }
+
+        int[] dp = new int[size];
+        dp[0] = numArray[0] * countArray[0];
+        for (int i = 1; i < size; i++) {
+            if (numArray[i] == numArray[i - 1] + 1) {
+                dp[i] = Math.max(dp[i - 1], (i == 1 ? 0 : dp[i - 2]) + numArray[i] * countArray[i]);
+            } else {
+                dp[i] = dp[i - 1] + numArray[i] * countArray[i];
+            }
+        }
+
+        return dp[size - 1];
     }
 }
