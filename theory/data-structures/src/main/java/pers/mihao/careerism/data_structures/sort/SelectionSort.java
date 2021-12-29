@@ -29,4 +29,18 @@ public class SelectionSort extends Sort {
             swap(nums, i, minIndex);
         }
     }
+
+    /**
+     * 初始交换值错误
+     * @param nums
+     */
+    public void sort20211214(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < nums.length; j++) {
+                min = nums[min] > nums[j] ? j : min;
+            }
+            swap(nums, min, i);
+        }
+    }
 }

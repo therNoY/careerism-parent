@@ -22,11 +22,15 @@ public class BubbleSort extends Sort {
     }
 
     /**
-     * 自己练习
+     * 边界值考虑错误
      * @param nums
      */
-    private void mySort(int[] nums) {
-
+    public void sort20211214(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length - i - 1; j++) {
+                if (nums[i] > nums[j + 1]) swap(nums, i, j + 1);
+            }
+        }
     }
 
 

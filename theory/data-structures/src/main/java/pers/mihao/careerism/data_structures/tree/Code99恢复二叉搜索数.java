@@ -89,5 +89,34 @@ public class Code99恢复二叉搜索数 {
         err2.val = temp;
     }
 
+    public void recoverTree20211229(TreeNode root) {
+        Deque<TreeNode> deque = new LinkedList<>();
+        TreeNode big = null, small = null, node = root, preNode = root;
+        Integer lastNum = null, temp;
+        while (node != null || !deque.isEmpty()) {
+            while (node != null) {
+                deque.addFirst(node);
+                node = node.left;
+            }
+            node = deque.pollFirst();
+            if (lastNum == null) {
+                lastNum = node.val;
+            } else {
+                if (big == null && lastNum > node.val) {
+                    big = preNode;
+                }
+                if (node.val < lastNum) {
+                    small = node;
+                }
+                lastNum = node.val;
+            }
+            preNode = node;
+            node = node.right;
+        }
+        temp = big.val;
+        big.val = small.val;
+        small.val = temp;
+    }
+
 
 }

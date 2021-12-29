@@ -80,22 +80,18 @@ public class Code94二叉树的中序遍历 {
     }
 
 
-    public List<Integer> inorderTraversal4(TreeNode root) {
+
+    private List<Integer> inorderTraversal4(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        if (root == null) return res;
         Deque<TreeNode> deque = new LinkedList<>();
-        deque.addLast(root);
-        TreeNode tail;
-        while (deque.size() > 0) {
-            tail = deque.pollLast();
-            if (tail != null){
-                if (tail.right != null) deque.addLast(tail.right);
-                deque.addLast(tail);
-                deque.addLast(null);
-                if (tail.left != null) deque.addLast(tail.left);
-            } else {
-                res.add(deque.pollLast().val);
+        while (root != null || !deque.isEmpty()) {
+            while (root != null) {
+                deque.push(root);
+                root = root.left;
             }
+            root = deque.pop();
+            res.add(root.val);
+            root = root.right;
         }
         return res;
     }

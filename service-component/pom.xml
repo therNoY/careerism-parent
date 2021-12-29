@@ -20,5 +20,12 @@
     <module>nginx</module>
   </modules>
 
+  <dependencies>
+    <dependency>
+      <groupId>pers.mihao.careerism</groupId>
+      <artifactId>common</artifactId>
+    </dependency>
+  </dependencies>
+
 
 </project>

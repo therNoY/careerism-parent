@@ -99,8 +99,8 @@ public class Main {
             System.out.println("排序前");
             Common.show(nums);
 //            new BubbleSort().sort(nums);
-//            new SelectionSort().my(nums);
-            new InsertionSort().mySort(nums);
+            new SelectionSort().sort20211214(nums);
+//            new InsertionSort().mySort(nums);
 //            new ShellSort().sort(nums);
 //            new HeapSort().sort(nums);
 //            new MergeSort().sort(nums);
