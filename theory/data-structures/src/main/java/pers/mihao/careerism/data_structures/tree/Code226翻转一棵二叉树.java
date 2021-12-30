@@ -1,38 +1,22 @@
 package pers.mihao.careerism.data_structures.tree;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import pers.mihao.careerism.data_structures.mytree.Tree;
 import pers.mihao.careerism.data_structures.util.TreeNode;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
- * 翻转一棵二叉树。
- * <p>
- * 示例：
- * <p>
- * 输入：
- * <p>
- * 4
- * /   \
- * 2     7
- * / \   / \
- * 1   3 6   9
- * 输出：
- * <p>
- * 4
- * /   \
- * 7     2
- * / \   / \
- * 9   6 3   1
- * <p>
- * 来源：力扣（LeetCode）
- * 链接：https://leetcode-cn.com/problems/invert-binary-tree
- * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ * @version 1.0
+ * @auther mihao
+ * @date 2021\12\30 0030 21:46
  */
-public class InvertTree {
+public class Code226翻转一棵二叉树 {
 
     public static void main(String[] args) {
-        System.out.println(new InvertTree().invertTree(TreeNode.getTreeByArray(new Integer[]{4, 2, 7, 1, 3, 6, 9})));
+        new Code226翻转一棵二叉树().invertTree(TreeNode.getTreeByArray(4,2,7,1,3,6,9)).print();
     }
+
 
     private TreeNode invertTree(TreeNode root) {
         if (root == null) return root;
@@ -59,4 +43,15 @@ public class InvertTree {
         }
         return root;
     }
+
+
+    public TreeNode invertTree20211230(TreeNode root) {
+        if (root == null) return null;
+        if (root.right == null && root.left == null) return root;
+        TreeNode right = root.right, left = root.left;
+        root.left = invertTree20211230(right);
+        root.right = invertTree20211230(left);
+        return root;
+    }
+
 }

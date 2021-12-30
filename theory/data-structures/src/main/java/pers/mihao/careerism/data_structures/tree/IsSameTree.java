@@ -1,5 +1,7 @@
 package pers.mihao.careerism.data_structures.tree;
 
+import pers.mihao.careerism.data_structures.util.TreeNode;
+
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -74,14 +76,5 @@ public class IsSameTree {
         return deque1.size() == deque2.size();
     }
 
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
 }
